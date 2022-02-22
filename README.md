@@ -38,6 +38,10 @@ ON client.id = product.id
 INNER JOIN theme
 ON client.theme_id = theme.id
 ```
+**UNION: set operator used to combine the result-set of two or more SELECT statements**
 
 ``` sql
+SELECT `name` FROM client
+UNION ALL
+SELECT `title` FROM product
 ```
