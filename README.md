@@ -22,7 +22,6 @@ THEME
 ```
 
 **INNER JOIN : returns records that have matching value in both tables**
-
 ``` sql
 SELECT *
 FROM client
@@ -74,7 +73,7 @@ ORDER BY `id` DESC
 ```
 
 
-**INTERSECT : return the records that two SELECT statements have in common**
+**INTERSECT : returns the records that two SELECT statements have in common**
 ``` sql
 SELECT DISTINCT `id` 
 FROM `client`
@@ -96,8 +95,7 @@ WHERE `id` NOT IN (
 ORDER BY `id` ASC
 ```
 
-**ORDER BY COUNT : Return the most repeated foreign key client_id in table product**
-
+**ORDER BY COUNT : returns the most repeated foreign key client_id in the product table**
 ``` sql
 SELECT client.id, client.name 
 FROM client 
@@ -109,3 +107,59 @@ WHERE client.id = (
     LIMIT 1
     )
 ```
+
+**Returns the least repeated foreign key client_id in the product table**
+``` sql
+SELECT client.id, client.name 
+FROM client 
+WHERE client.id = (
+    SELECT client_id 
+    FROM product 
+    GROUP BY product.client_id 
+    ORDER BY COUNT(*) ASC 
+    LIMIT 1
+    )
+```
+
+**Returns the list of clients who have not yet purchased a product**
+``` sql
+SELECT client.name
+FROM client
+WHERE id NOT IN (
+    SELECT product.client_id 
+    FROM product
+    )
+```
+
+**Client who bought the most products**
+``` sql
+SELECT product.client_id, client.name, COUNT(*) AS 'spentmost'
+FROM product 
+JOIN client
+ON product.client_id = client.id
+GROUP BY product.client_id
+LIMIT 1
+```
+
+**Two clients who bought the most products**
+``` sql
+SELECT product.client_id, client.name, COUNT(*) AS 'spentmost'
+FROM product 
+JOIN client
+ON product.client_id = client.id
+GROUP BY product.client_id
+LIMIT 2
+```
+
+**Two clients who bought the most products**
+``` sql
+SELECT product.client_id, client.name, COUNT(*) AS 'spentmost'
+FROM product 
+JOIN client
+ON product.client_id = client.id
+GROUP BY product.client_id
+LIMIT 2
+```
+
+
+
