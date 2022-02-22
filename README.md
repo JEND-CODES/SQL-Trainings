@@ -39,7 +39,6 @@ ON client.theme_id = theme.id
 ```
 
 **UNION : operator used to combine the result of two or more SELECT statements**
-
 ``` sql
 SELECT `name` FROM client
 UNION ALL
@@ -62,7 +61,7 @@ SELECT `title` FROM product
 ORDER BY `name` ASC
 ```
 
-**Fusion of two tables with union all**
+**Fusion of two tables with UNION ALL**
 ``` sql
 SELECT 'client' AS table_name, `id`, null AS `title`, null AS `description`
 FROM client
@@ -161,5 +160,44 @@ GROUP BY product.client_id
 LIMIT 2
 ```
 
+**SUM, AVG**
+``` sql
+SELECT 
+SUM(price) AS price_sum,
+SUM(id) AS id_sum,
+SUM(client_id) AS client_id_sum
+FROM product
+```
 
+``` sql
+SELECT 
+SUM(price) AS price_sum,
+SUM(id) AS id_sum,
+SUM(client_id) AS client_id_sum,
+(SUM(price) + SUM(id) + SUM(client_id)) as 'Total'
+FROM product
+```
+
+``` sql
+SELECT `title`, `client_id`,
+AVG(price) AS price_avg
+FROM product
+INNER JOIN client
+WHERE product.client_id = client.id
+```
+
+**Spend of each client for each product**
+``` sql
+SELECT 
+    product.price AS spent,
+    client.name AS buyer
+FROM 
+    product
+INNER JOIN 
+    client
+WHERE 
+    product.client_id = client.id
+GROUP BY 
+    product.id
+```
 
