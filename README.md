@@ -149,7 +149,7 @@ SELECT
 FROM client 
 INNER JOIN product ON client.id = product.client_id 
 GROUP BY client.id, client.name
-HAVING spentmost =  (       
+HAVING spentmost = (       
     SELECT COUNT(product.client_id) AS spentmost
     FROM product
     GROUP BY client_id
