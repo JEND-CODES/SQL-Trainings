@@ -55,7 +55,7 @@ SELECT `id`, `title` FROM product
 WHERE `title` = 'Product1'
 ```
 
-**Alphabetical results**
+**Order alphabetically**
 ``` sql
 SELECT `name` FROM client
 UNION ALL
@@ -71,4 +71,41 @@ UNION ALL
 SELECT 'product' AS table_name, `id`, null AS `name`, null AS `theme`
 FROM product
 ORDER BY `id` DESC
+```
+
+
+**INTERSECT : return the records that two SELECT statements have in common**
+``` sql
+SELECT DISTINCT `id` 
+FROM `client`
+WHERE `id` IN (
+  SELECT `id` 
+  FROM `product`
+  )
+ORDER BY `id` ASC
+```
+
+
+**IN / NOT IN : allows to specify multiple values in a WHERE clause**
+``` sql
+SELECT DISTINCT `id` FROM `product`
+WHERE `id` NOT IN (
+  SELECT `id` 
+  FROM `client`
+  )
+ORDER BY `id` ASC
+```
+
+**ORDER BY COUNT : Return the most repeated foreign key client_id in table product**
+
+``` sql
+SELECT client.id, client.name 
+FROM client 
+WHERE client.id = (
+    SELECT client_id 
+    FROM product 
+    GROUP BY product.client_id 
+    ORDER BY COUNT(*) DESC 
+    LIMIT 1
+    )
 ```
