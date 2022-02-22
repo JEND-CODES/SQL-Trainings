@@ -14,3 +14,10 @@ PRODUCT
 └─── price
 └─── createdAt
 ```
+
+``` sql
+SELECT *
+FROM client
+INNER JOIN product
+WHERE client.id = product.id
+```
