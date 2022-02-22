@@ -15,9 +15,14 @@ PRODUCT
 └─── createdAt
 ```
 
+**INNER JOIN : returns records that have matching value in both tables**
+
 ``` sql
 SELECT *
 FROM client
 INNER JOIN product
 WHERE client.id = product.id
+```
+
+``` sql
 ```
