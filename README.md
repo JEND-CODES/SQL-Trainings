@@ -326,7 +326,6 @@ SELECT *
 FROM product
 ORDER BY product.id ASC
 LIMIT " . $limit . "
-OFFSET " . $offset . "
 ```
 
 ``` sql
@@ -334,7 +333,6 @@ SELECT *
 FROM product
 ORDER BY product.id ASC
 LIMIT {$limit}
-OFFSET {$offset}
 ```
 
 ``` sql
@@ -342,5 +340,4 @@ SELECT *
 FROM product
 ORDER BY product.id ASC
 LIMIT :limitation
-OFFSET :offset
 ```
